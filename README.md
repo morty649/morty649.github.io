@@ -21,6 +21,20 @@ The static output is written to `out/`.
 
 ## Writing a blog post
 
+The easiest way is the local editor:
+
+```bash
+pnpm write
+```
+
+It opens `http://127.0.0.1:4321/write/` with a post list, a Markdown editor (paste or drop images straight in), and a live preview rendered exactly like the site. **Save draft** (Cmd+S) keeps the post on your machine. **Publish** commits only that post and its images, pushes to `main`, and follows the GitHub Actions deploy until the post is live. The editor only listens on 127.0.0.1 and is never part of the deployed site: its files are named `*.writer.ts(x)`, which only `pnpm write` builds.
+
+For a published post, **Unpublish** takes it off the live site and keeps it as a draft, and **Delete** removes the post and its images from the site and the repo. Both push and deploy the same way. The repo is public, so a deleted post still exists in git history.
+
+If Publish reports that GitHub has commits this machine does not, run `git pull --rebase origin main` and publish again.
+
+### Post files
+
 Posts are Markdown files in `content/blog/`. The file name becomes the URL, so `content/blog/my-post.md` is published at `/blog/my-post/`.
 
 ```markdown

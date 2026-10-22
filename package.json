@@ -6,6 +6,7 @@
   "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "next dev",
+    "write": "node scripts/write.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

@@ -25,9 +25,9 @@ export type PostMeta = {
 
 export type Post = PostMeta & { html: string };
 
-const POSTS_DIR = path.join(process.cwd(), "content", "blog");
-const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+export const POSTS_DIR = path.join(process.cwd(), "content", "blog");
+export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+export const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const WORDS_PER_MINUTE = 200;
 
 // Drafts show up in `pnpm dev` and are left out of production builds.
@@ -44,7 +44,8 @@ function readDate(value: unknown, file: string, field: string) {
   throw new Error(`content/blog/${file}: "${field}" must be a date like 2026-10-23`);
 }
 
-function readPostFile(file: string) {
+/** Parses and validates one file in content/blog, throwing a readable error if it is malformed. */
+export function readPostFile(file: string) {
   const slug = path.basename(file, ".md");
   if (!SLUG_PATTERN.test(slug)) {
     throw new Error(
@@ -100,6 +101,10 @@ export async function getPost(slug: string): Promise<Post | undefined> {
     return undefined;
   }
 
+  return { ...entry.meta, html: await renderMarkdown(entry.content) };
+}
+
+export async function renderMarkdown(markdown: string) {
   const html = await unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -120,7 +125,7 @@ export async function getPost(slug: string): Promise<Post | undefined> {
       defaultLang: { block: "plaintext" },
     })
     .use(rehypeStringify)
-    .process(entry.content);
+    .process(markdown);
 
-  return { ...entry.meta, html: html.toString() };
+  return html.toString();
 }
