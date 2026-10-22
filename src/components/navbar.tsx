@@ -7,11 +7,12 @@ import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { SITE } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
-import { Braces, FileText, Github, Home, Linkedin } from "lucide-react";
+import { Braces, FileText, Github, Home, Linkedin, PenLine } from "lucide-react";
 import Link from "next/link";
 
 const navigation = [
   { href: "/", icon: Home, label: "Home" },
+  { href: "/blog/", icon: PenLine, label: "Blog" },
   { href: "/resume/", icon: FileText, label: "Resume" },
 ];
 

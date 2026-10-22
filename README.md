@@ -19,6 +19,30 @@ pnpm build
 
 The static output is written to `out/`.
 
+## Writing a blog post
+
+Posts are Markdown files in `content/blog/`. The file name becomes the URL, so `content/blog/my-post.md` is published at `/blog/my-post/`.
+
+```markdown
+---
+title: "Post title"
+date: 2026-10-23
+summary: "One sentence for cards, search results, and the RSS feed."
+tags: ["JEPA", "World models"]
+draft: true
+---
+
+Write the post here.
+```
+
+- `title`, `date`, and `summary` are required; the build stops with a clear message if one is missing.
+- `draft: true` shows the post in `pnpm dev` and keeps it out of the production build. Delete the line to publish.
+- `updated` (optional) records a later revision date.
+- Posts support GitHub-flavoured Markdown, footnotes, highlighted code blocks, LaTeX math (`$inline$` and `$$display$$`), and raw HTML.
+- Put images in `public/images/blog/<slug>/` and reference them as `/images/blog/<slug>/figure.png`.
+
+`content/blog/writing-guide.md` is a draft that demonstrates every feature. Published posts appear on `/blog/`, in the homepage "Writing" section (latest three), in `sitemap.xml`, and in the RSS feed at `/feed.xml`.
+
 ## Deployment
 
 The GitHub Actions workflow builds pull requests without publishing them and deploys pushes to `main` through GitHub Pages. It requires no personal access token and exposes no client-side secret.
