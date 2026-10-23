@@ -25,7 +25,14 @@ export type PostMeta = {
 
 export type Post = PostMeta & { html: string };
 
+/** A story written on Medium: listed on /blog next to local posts, but it links out. */
+export type MediumPost = PostMeta & { url: string };
+
+export type ListedPost = PostMeta | MediumPost;
+
 export const POSTS_DIR = path.join(process.cwd(), "content", "blog");
+// Written by scripts/sync-medium.mjs; absent until the first sync.
+const MEDIUM_FILE = path.join(process.cwd(), "content", "medium.json");
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const WORDS_PER_MINUTE = 200;
@@ -92,6 +99,45 @@ function readAllPosts() {
 /** Published posts, newest first. Reads frontmatter only, so it is cheap to call. */
 export function getPosts(): PostMeta[] {
   return readAllPosts().map(({ meta }) => meta);
+}
+
+type SavedMediumPost = {
+  id: string;
+  title: string;
+  url: string;
+  date: string;
+  summary: string;
+  tags: string[];
+  readingMinutes: number;
+};
+
+function getMediumPosts(): MediumPost[] {
+  if (!fs.existsSync(MEDIUM_FILE)) {
+    return [];
+  }
+
+  const saved: SavedMediumPost[] = JSON.parse(fs.readFileSync(MEDIUM_FILE, "utf8"));
+  return saved.map((post) => ({
+    slug: `medium-${post.id}`,
+    title: post.title,
+    date: post.date,
+    summary: post.summary,
+    tags: post.tags,
+    draft: false,
+    readingMinutes: post.readingMinutes,
+    url: post.url,
+  }));
+}
+
+/** Local and Medium posts together, newest first, for the blog index, the homepage and RSS. */
+export function getListedPosts(): ListedPost[] {
+  return [...getPosts(), ...getMediumPosts()].sort(
+    (a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title)
+  );
+}
+
+export function isMediumPost(post: ListedPost): post is MediumPost {
+  return "url" in post;
 }
 
 export async function getPost(slug: string): Promise<Post | undefined> {

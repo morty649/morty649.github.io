@@ -1,5 +1,5 @@
 import { SITE } from "@/data/portfolio";
-import { getPosts } from "@/lib/blog";
+import { getListedPosts, isMediumPost } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
@@ -13,9 +13,9 @@ function escapeXml(value: string) {
 }
 
 export function GET() {
-  const items = getPosts()
+  const items = getListedPosts()
     .map((post) => {
-      const url = `${SITE.url}/blog/${post.slug}/`;
+      const url = isMediumPost(post) ? post.url : `${SITE.url}/blog/${post.slug}/`;
       const categories = post.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join("");
       return `<item><title>${escapeXml(post.title)}</title><link>${url}</link><guid>${url}</guid><pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate><description>${escapeXml(post.summary)}</description>${categories}</item>`;
     })

@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+# Medium stories, synced at deploy time and saved on the medium-cache branch
+/content/medium.json
+
 # next.js
 /.next/
 /out/

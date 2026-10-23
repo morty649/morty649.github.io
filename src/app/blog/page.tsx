@@ -1,6 +1,6 @@
 import { PostCard } from "@/components/post-card";
 import { SITE } from "@/data/portfolio";
-import { getPosts } from "@/lib/blog";
+import { getListedPosts } from "@/lib/blog";
 import { ArrowLeft, Rss } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getPosts();
+  const posts = getListedPosts();
 
   return (
     <main id="main-content" className="space-y-6 py-section-lg">

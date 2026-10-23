@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Award, ChevronDown, Network } from "lucide-react";
 import { PostCard } from "@/components/post-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { PostMeta } from "@/lib/blog";
+import type { ListedPost } from "@/lib/blog";
 import {
   ADDITIONAL_PROJECTS,
   CREDENTIALS,
@@ -45,7 +45,7 @@ function GlassCard({
   );
 }
 
-export function HomePage({ latestPosts }: { latestPosts: readonly PostMeta[] }) {
+export function HomePage({ latestPosts }: { latestPosts: readonly ListedPost[] }) {
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [archiveExpanded, setArchiveExpanded] = useState(false);
   const [showProjectsGraph, setShowProjectsGraph] = useState(false);
