@@ -79,7 +79,6 @@ export default function Navbar() {
                 onClick={toggleSound}
                 className={dockLinkClass}
                 aria-label={soundOn ? "Mute music" : "Play music"}
-                aria-pressed={soundOn}
               >
                 {soundOn ? <Volume2 className="size-4" /> : <VolumeX className="size-4" />}
               </button>

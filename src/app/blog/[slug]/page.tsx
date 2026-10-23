@@ -46,11 +46,13 @@ export function generateMetadata({ params }: PostPageProps): Metadata {
       modifiedTime: post.updated ?? post.date,
       authors: [SITE.name],
       tags: [...post.tags],
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} portfolio` }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.summary,
+      images: ["/og.png"],
     },
   };
 }

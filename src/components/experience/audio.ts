@@ -37,6 +37,15 @@ export function isPlaying() {
   return wanted;
 }
 
+/** True when the visitor muted the music on an earlier visit. */
+export function prefersMuted() {
+  try {
+    return localStorage.getItem(MUTED_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 function rememberMuted(muted: boolean) {
   try {
     localStorage.setItem(MUTED_KEY, muted ? "1" : "0");

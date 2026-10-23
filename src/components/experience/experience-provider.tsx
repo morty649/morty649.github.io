@@ -50,7 +50,8 @@ export function ExperienceProvider({ children }: { children: React.ReactNode }) 
       // Without storage the intro simply shows again next time.
     }
     setGate(false);
-    if (withSound) void audio.play();
+    // A visitor who muted the music before stays muted until they turn it back on.
+    if (withSound && !audio.prefersMuted()) void audio.play();
   }, []);
 
   const toggleSound = useCallback(() => {

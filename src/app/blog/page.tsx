@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     canonical: "/blog/",
     types: { "application/rss+xml": "/feed.xml" },
   },
+  openGraph: {
+    title: `Blog | ${SITE.name}`,
+    description: `Writing by ${SITE.name} on world models, continual learning, and reinforcement learning.`,
+    url: `${SITE.url}/blog/`,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} portfolio` }],
+  },
 };
 
 export default function BlogPage() {

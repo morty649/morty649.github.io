@@ -426,10 +426,16 @@ html[data-gate] .intro-gate {
   transition: opacity 1.2s ease 0.3s;
 }
 
+html[data-gate] .skip-link {
+  visibility: hidden;
+}
+
 html[data-gate] .site-shell,
 html[data-gate] .site-dock {
   opacity: 0;
   pointer-events: none;
+  /* Also keeps the hidden page out of the tab order and away from screen readers. */
+  visibility: hidden;
 }
 
 /* Blog post body: a long card should not lift on hover */
