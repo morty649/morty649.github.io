@@ -1,72 +1,24 @@
-# Maruthi Enugula - Portfolio
+# morty649.github.io
 
-Personal portfolio for [Maruthi Enugula](https://github.com/morty649), focused on reinforcement learning, agentic AI, retrieval systems, and applied machine learning.
+hey, i'm Maruthi. this is my corner of the internet: [morty649.github.io](https://morty649.github.io)
 
-The site is built with Next.js, TypeScript, and Tailwind CSS, exported as a static site, and configured for the `morty649.github.io` GitHub Pages user site.
+i mostly think about world models (JEPA-style stuff), models that keep learning after training, and how RL agents find sneaky ways to game their rewards. this site is where all of that lives.
 
-## Local development
+## what's in here
 
-```bash
-pnpm install
-pnpm dev
-```
+- **the rings.** the first time you land on the site, there's a little intro: a bunch of nested rings drifting around a small cloud of points that keeps changing shape. i think of it as a latent space, quietly doing its thing. click in and a soft ambient hum starts (there's a mute button in the dock). after that the rings hang out behind everything else.
+- **the portfolio.** projects, research threads, the stuff i've built and broken, plus a couple of graphs that show how it all connects.
+- **the blog.** longer write-ups on experiments, what worked, and honestly what didn't. i write these in a tiny editor that only runs on my laptop.
+- **medium posts too.** if i write something on [Medium](https://medium.com/@mortylogs), it shows up on the blog a few hours later with a little "on Medium" tag.
+- **a resume page**, for when someone needs the boring version.
 
-Create a production export with:
+## where things live
 
-```bash
-pnpm build
-```
+- `content/blog/` has the blog posts, just markdown
+- `src/data/portfolio.ts` has the projects, research and everything about me
+- `src/components/experience/` is the rings and the sound
+- `src/app/` holds the pages
 
-The static output is written to `out/`.
+## credits
 
-## Writing a blog post
-
-The easiest way is the local editor:
-
-```bash
-pnpm write
-```
-
-It opens `http://127.0.0.1:4321/write/` with a post list, a Markdown editor (paste or drop images straight in), and a live preview rendered exactly like the site. **Save draft** (Cmd+S) keeps the post on your machine. **Publish** commits only that post and its images, pushes to `main`, and follows the GitHub Actions deploy until the post is live. The editor only listens on 127.0.0.1 and is never part of the deployed site: its files are named `*.writer.ts(x)`, which only `pnpm write` builds.
-
-For a published post, **Unpublish** takes it off the live site and keeps it as a draft, and **Delete** removes the post and its images from the site and the repo. Both push and deploy the same way. The repo is public, so a deleted post still exists in git history.
-
-If Publish reports that GitHub has commits this machine does not, run `git pull --rebase origin main` and publish again.
-
-### Post files
-
-Posts are Markdown files in `content/blog/`. The file name becomes the URL, so `content/blog/my-post.md` is published at `/blog/my-post/`.
-
-```markdown
----
-title: "Post title"
-date: 2026-10-23
-summary: "One sentence for cards, search results, and the RSS feed."
-tags: ["JEPA", "World models"]
-draft: true
----
-
-Write the post here.
-```
-
-- `title`, `date`, and `summary` are required; the build stops with a clear message if one is missing.
-- `draft: true` shows the post in `pnpm dev` and keeps it out of the production build. Delete the line to publish.
-- `updated` (optional) records a later revision date.
-- Posts support GitHub-flavoured Markdown, footnotes, highlighted code blocks, LaTeX math (`$inline$` and `$$display$$`), and raw HTML.
-- Put images in `public/images/blog/<slug>/` and reference them as `/images/blog/<slug>/figure.png`.
-
-`content/blog/writing-guide.md` is a draft that demonstrates every feature. Published posts appear on `/blog/`, in the homepage "Writing" section (latest three), in `sitemap.xml`, and in the RSS feed at `/feed.xml`.
-
-## Deployment
-
-The GitHub Actions workflow builds pull requests without publishing them and deploys pushes to `main` through GitHub Pages. It requires no personal access token and exposes no client-side secret.
-
-## Content policy
-
-Project descriptions are based on Maruthi's resumes, public repositories, model pages, demos, and professional profiles. Unverified performance metrics are intentionally omitted.
-
-## Credits
-
-The site adapts the interactive glass-card portfolio and Obsidian-style graph work from [Hailey Cheng's portfolio](https://github.com/heilcheng/portfolio), which itself credits the original portfolio foundation by [Dillion Verma](https://github.com/dillionverma/portfolio). The retained design patterns include the narrow card shell, ambient background, bottom dock, motion system, timeline treatment, and D3 graph interaction. Maruthi's content and project relationships replace the reference site's personal material.
-
-The original MIT license is included.
+this started from [Hailey Cheng's portfolio](https://github.com/heilcheng/portfolio), which itself grew out of [Dillion Verma's](https://github.com/dillionverma/portfolio). i kept their glass cards, the dock and the graph ideas, and made the rest mine. MIT licensed, same as theirs.
