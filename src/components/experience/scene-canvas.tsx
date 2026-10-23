@@ -23,7 +23,7 @@ type Pose = { x: number; y: number; scale: number; opacity: number };
  */
 function poseFor(pathname: string, gate: boolean): Pose {
   if (pathname.startsWith("/write")) return { x: 0, y: 0, scale: 1, opacity: 0 };
-  if (gate) return { x: 0, y: 0.1, scale: 1, opacity: 1 };
+  if (gate) return { x: 0, y: 0.17, scale: 0.92, opacity: 1 };
   if (pathname === "/") return { x: 0, y: 0, scale: 1.55, opacity: 0.55 };
   return { x: -0.6, y: 0, scale: 1.9, opacity: 0.4 };
 }
@@ -103,15 +103,18 @@ export default function SceneCanvas() {
     const target = new THREE.Vector2();
     let lastMove = performance.now();
     let rawSpeed = 0;
+    let pointerSeen = false;
     const frame: SceneFrame = {
       time: 0,
       delta: 0,
       pointer: new THREE.Vector2(),
       pointerSpeed: 0,
+      ray: new THREE.Ray(),
       audio: readAudio(),
       intro: gateRef.current ? 1 : 0,
     };
     const raycaster = new THREE.Raycaster();
+    const pointerRaycaster = new THREE.Raycaster();
 
     const onPointerMove = (event: PointerEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -121,6 +124,9 @@ export default function SceneCanvas() {
       rawSpeed = Math.min(1, rawSpeed + (Math.hypot(x - target.x, y - target.y) / elapsed) * 40);
       target.set(x, y);
       lastMove = now;
+      // Start the smoothed pointer where the pointer first appears, not with a sweep from the centre.
+      if (!pointerSeen) frame.pointer.copy(target);
+      pointerSeen = true;
     };
     const onPointerDown = (event: PointerEvent) => {
       onPointerMove(event);
@@ -137,6 +143,8 @@ export default function SceneCanvas() {
       frame.delta = delta;
       frame.time += delta;
       frame.pointer.lerp(target, 1 - Math.exp(-delta * 4));
+      pointerRaycaster.setFromCamera(frame.pointer, camera);
+      frame.ray.copy(pointerRaycaster.ray);
       rawSpeed *= Math.exp(-delta * 2.5);
       frame.pointerSpeed = rawSpeed;
       frame.audio = readAudio();

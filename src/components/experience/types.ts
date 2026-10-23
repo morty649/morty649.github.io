@@ -28,6 +28,8 @@ export type SceneFrame = {
   pointer: THREE.Vector2;
   /** Smoothed pointer speed, roughly 0..1. Decays to 0 when the pointer rests. */
   pointerSpeed: number;
+  /** World-space ray from the camera through the smoothed pointer, for scenes that react to where it points. */
+  ray: THREE.Ray;
   audio: AudioReading;
   /** 1 while the intro screen is showing, easing to 0 after the visitor enters. */
   intro: number;
