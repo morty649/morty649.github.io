@@ -7,7 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { SITE } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
-import { Braces, FileText, Github, Home, Linkedin, PenLine } from "lucide-react";
+import { useExperience } from "@/components/experience/experience-provider";
+import { Braces, FileText, Github, Home, Linkedin, PenLine, Volume2, VolumeX } from "lucide-react";
 import Link from "next/link";
 
 const navigation = [
@@ -28,8 +29,10 @@ const dockLinkClass = cn(
 );
 
 export default function Navbar() {
+  const { soundOn, toggleSound } = useExperience();
+
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex h-full max-h-14 origin-bottom">
+    <div className="site-dock pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex h-full max-h-14 origin-bottom">
       <div className="fixed inset-x-0 bottom-0 h-16 w-full bg-gradient-to-t from-background/80 to-transparent backdrop-blur-md" />
       <Dock className="glass-navbar pointer-events-auto relative z-50 mx-auto flex h-full min-h-full items-center rounded-2xl px-2 transform-gpu">
         {navigation.map((item) => (
@@ -67,6 +70,22 @@ export default function Navbar() {
         ))}
 
         <Separator orientation="vertical" className="h-full py-2 opacity-30" />
+
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                onClick={toggleSound}
+                className={dockLinkClass}
+                aria-label={soundOn ? "Mute music" : "Play music"}
+              >
+                {soundOn ? <Volume2 className="size-4" /> : <VolumeX className="size-4" />}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent className="glass-card border-none"><p>{soundOn ? "Mute" : "Music"}</p></TooltipContent>
+          </Tooltip>
+        </DockIcon>
 
         <DockIcon>
           <Tooltip>

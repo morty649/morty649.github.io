@@ -1,3 +1,5 @@
+import { ExperienceLayer } from "@/components/experience/experience-layer";
+import { ExperienceProvider, GATE_SCRIPT } from "@/components/experience/experience-provider";
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -78,6 +80,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: GATE_SCRIPT }} />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -85,16 +90,19 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="light">
-          <TooltipProvider delayDuration={0}>
-            <AmbientBackground />
-            <a className="skip-link" href="#main-content">
-              Skip to content
-            </a>
-            <div className="relative z-10 mx-auto max-w-3xl px-container-padding pb-24">
-              {children}
-            </div>
-            <Navbar />
-          </TooltipProvider>
+          <ExperienceProvider>
+            <TooltipProvider delayDuration={0}>
+              <AmbientBackground />
+              <ExperienceLayer />
+              <a className="skip-link" href="#main-content">
+                Skip to content
+              </a>
+              <div className="site-shell relative z-10 mx-auto max-w-3xl px-container-padding pb-24">
+                {children}
+              </div>
+              <Navbar />
+            </TooltipProvider>
+          </ExperienceProvider>
         </ThemeProvider>
       </body>
     </html>

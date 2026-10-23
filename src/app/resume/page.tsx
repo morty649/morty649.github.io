@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   title: "Resume",
   description: `Web resume for ${SITE.name}, AI/ML engineer and researcher.`,
   alternates: { canonical: "/resume/" },
+  openGraph: {
+    title: `Resume | ${SITE.name}`,
+    description: `Web resume for ${SITE.name}, AI/ML engineer and researcher.`,
+    url: `${SITE.url}/resume/`,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} portfolio` }],
+  },
 };
 
 export default function ResumePage() {
