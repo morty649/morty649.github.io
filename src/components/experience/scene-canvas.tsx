@@ -24,8 +24,8 @@ type Pose = { x: number; y: number; scale: number; opacity: number };
 function poseFor(pathname: string, gate: boolean): Pose {
   if (pathname.startsWith("/write")) return { x: 0, y: 0, scale: 1, opacity: 0 };
   if (gate) return { x: 0, y: 0.17, scale: 0.92, opacity: 1 };
-  if (pathname === "/") return { x: 0, y: 0, scale: 1.55, opacity: 0.55 };
-  return { x: -0.6, y: 0, scale: 1.9, opacity: 0.4 };
+  if (pathname === "/") return { x: 0, y: 0, scale: 1.55, opacity: 0.75 };
+  return { x: -0.6, y: 0, scale: 1.9, opacity: 0.5 };
 }
 
 export default function SceneCanvas() {

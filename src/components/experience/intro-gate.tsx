@@ -23,10 +23,10 @@ export function IntroGate() {
           }}
           className="intro-gate-title text-lg font-light lowercase tracking-[0.32em] text-foreground/75 transition-colors hover:text-foreground md:text-xl"
         >
-          step into the world model
+          step into my world
         </button>
         <p className="text-[11px] lowercase tracking-[0.28em] text-muted-foreground">
-          {SITE.name} · sound on
+          {SITE.name}
         </p>
         <button
           type="button"
