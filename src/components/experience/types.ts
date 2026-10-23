@@ -26,8 +26,6 @@ export type SceneFrame = {
   delta: number;
   /** Smoothed pointer (mouse or touch) in normalised device coordinates, -1..1. */
   pointer: THREE.Vector2;
-  /** Smoothed pointer speed, roughly 0..1. Decays to 0 when the pointer rests. */
-  pointerSpeed: number;
   /** World-space ray from the camera through the smoothed pointer, for scenes that react to where it points. */
   ray: THREE.Ray;
   audio: AudioReading;
@@ -46,8 +44,6 @@ export interface RingScene {
   object: THREE.Object3D;
   update(frame: SceneFrame): void;
   setPalette(palette: ScenePalette): void;
-  /** Called with a raycaster aimed at the pointer when the visitor presses on the page background. */
-  onPointerDown?(raycaster: THREE.Raycaster): void;
   dispose(): void;
 }
 

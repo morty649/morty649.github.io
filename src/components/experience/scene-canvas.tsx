@@ -101,39 +101,24 @@ export default function SceneCanvas() {
     };
 
     const target = new THREE.Vector2();
-    let lastMove = performance.now();
-    let rawSpeed = 0;
     let pointerSeen = false;
     const frame: SceneFrame = {
       time: 0,
       delta: 0,
       pointer: new THREE.Vector2(),
-      pointerSpeed: 0,
       ray: new THREE.Ray(),
       audio: readAudio(),
       intro: gateRef.current ? 1 : 0,
     };
-    const raycaster = new THREE.Raycaster();
     const pointerRaycaster = new THREE.Raycaster();
 
     const onPointerMove = (event: PointerEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
-      const now = performance.now();
-      const elapsed = Math.max(16, now - lastMove);
-      rawSpeed = Math.min(1, rawSpeed + (Math.hypot(x - target.x, y - target.y) / elapsed) * 40);
       target.set(x, y);
-      lastMove = now;
       // Start the smoothed pointer where the pointer first appears, not with a sweep from the centre.
       if (!pointerSeen) frame.pointer.copy(target);
       pointerSeen = true;
-    };
-    const onPointerDown = (event: PointerEvent) => {
-      onPointerMove(event);
-      // Only clicks on the bare page reach the scene, never clicks on cards, links, or buttons.
-      if (!rings.onPointerDown || (event.target as Element).closest("a, button, input, textarea, select, .glass-card")) return;
-      raycaster.setFromCamera(target, camera);
-      rings.onPointerDown(raycaster);
     };
 
     const clock = new THREE.Clock();
@@ -145,8 +130,6 @@ export default function SceneCanvas() {
       frame.pointer.lerp(target, 1 - Math.exp(-delta * 4));
       pointerRaycaster.setFromCamera(frame.pointer, camera);
       frame.ray.copy(pointerRaycaster.ray);
-      rawSpeed *= Math.exp(-delta * 2.5);
-      frame.pointerSpeed = rawSpeed;
       frame.audio = readAudio();
       frame.intro += ((gateRef.current ? 1 : 0) - frame.intro) * (1 - Math.exp(-delta * 1.5));
       placeHolder(1 - Math.exp(-delta * 1.8));
@@ -175,7 +158,7 @@ export default function SceneCanvas() {
     };
     window.addEventListener("resize", onResize);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointerdown", onPointerMove, { passive: true });
 
     if (reducedMotion) drawStill();
     else renderer.setAnimationLoop(render);
@@ -190,7 +173,7 @@ export default function SceneCanvas() {
       renderer.setAnimationLoop(null);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointerdown", onPointerMove);
       controls.current = null;
       rings.dispose();
       renderer.dispose();

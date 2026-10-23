@@ -153,12 +153,6 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
 
-  /* Bento grid layout */
-  .bento-grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-
   /* Ambient background */
   .ambient-bg {
     position: fixed;
@@ -232,11 +226,6 @@
     }
   }
 
-  /* Section bento card */
-  .section-bento {
-    @apply glass-card p-6 md:p-8;
-  }
-
   /* Hero section special styling */
   .hero-glass {
     background: linear-gradient(135deg,
@@ -268,25 +257,9 @@
     @apply mb-section-lg;
   }
 
-  .content-spacing-sm {
-    @apply space-y-content-sm;
-  }
-
-  .content-spacing-md {
-    @apply space-y-content-md;
-  }
-
-  .content-spacing-lg {
-    @apply space-y-content-lg;
-  }
-
   /* Layout utilities for consistent containers */
   .page-container {
     @apply max-w-3xl mx-auto px-container-padding;
-  }
-
-  .section-container {
-    @apply w-full;
   }
 
   /* Typography spacing utilities */
@@ -297,15 +270,6 @@
   /* Keep blog images at natural size, capped to the column */
   .prose img {
     @apply max-w-full h-auto mx-auto rounded-lg;
-  }
-
-  /* Soft text shadow for headings */
-  .text-glow {
-    text-shadow: 0 0 40px rgba(var(--gradient-2), 0.3);
-  }
-
-  .dark .text-glow {
-    text-shadow: 0 0 40px rgba(var(--gradient-2), 0.4);
   }
 }
 

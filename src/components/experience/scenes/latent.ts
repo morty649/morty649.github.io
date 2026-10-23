@@ -654,7 +654,6 @@ export const createScene: CreateScene = ({ quality, reducedMotion, palette }) =>
     time: 0,
     delta: 0,
     pointer: new THREE.Vector2(),
-    pointerSpeed: 0,
     ray: new THREE.Ray(),
     audio: { level: 0, low: 0, mid: 0, high: 0 },
     intro: 1,
