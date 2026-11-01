@@ -3,6 +3,12 @@ export type ProjectLink = {
   url: string;
 };
 
+export type ProjectVideo = {
+  src: string;
+  poster: string;
+  caption?: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -16,6 +22,7 @@ export type Project = {
   outcomes: readonly string[];
   technologies: readonly string[];
   links: readonly ProjectLink[];
+  video?: ProjectVideo;
   featured: boolean;
   resumeBacked: boolean;
   accent: "teal" | "amber" | "blue" | "violet";
@@ -216,6 +223,39 @@ export const RESEARCH: readonly ResearchThread[] = [
 ];
 
 export const PROJECTS: readonly Project[] = [
+  {
+    slug: "self-play-pong",
+    title: "Self-Play Pong: A DQN That Learns by Playing Itself",
+    shortTitle: "Self-Play Pong",
+    period: "Oct 2026",
+    category: "Reinforcement learning",
+    status: "Finished",
+    summary:
+      "I wrote Pong from scratch in pygame, then trained a DQN on raw pixels by making it play older copies of itself. In the video it's on both paddles.",
+    problem:
+      "I wanted to see self-play work end to end on something small enough to fully understand. Writing the game myself instead of using Atari meant I controlled the observations, the reward and the opponent.",
+    approach: [
+      "Built Pong as a Gymnasium env in pygame. Either paddle can be a human, a scripted bot or the trained model, so I can play against whatever I train.",
+      "The agent sees three stacked 84x84 black-and-white frames and picks up, down or stay. It's a small conv net trained with Double DQN, a 200k-transition replay buffer kept on the GPU, and a target network synced every 10k steps.",
+      "One network plays both sides. When it's on the left paddle the frame is mirrored, so it only has to learn one game.",
+      "Its opponent is drawn from a pool of its 5 best past checkpoints. Every 100 episodes the current model is scored against the hard scripted bot and added to the pool. Sides swap every episode.",
+    ],
+    outcomes: [
+      "5,000 episodes in about 2.6 hours on a Kaggle T4.",
+      "Against the hard scripted bot, the average point margin per eval game went from -4.0 at episode 100 to +4.0 at its best (episode 3,300), and held around +2.9 over the last 1,000 episodes.",
+      "The video is that model playing itself. Human vs AI works too, so you can play it.",
+    ],
+    technologies: ["Python", "PyTorch", "DQN", "pygame", "Gymnasium"],
+    links: [{ label: "GitHub", url: "https://github.com/morty649/self-play-pong" }],
+    video: {
+      src: "/videos/self-play-pong.mp4",
+      poster: "/videos/self-play-pong.jpg",
+      caption: "The trained model playing itself: green and purple are the same network.",
+    },
+    featured: true,
+    resumeBacked: false,
+    accent: "teal",
+  },
   {
     slug: "vision-ppo-racing-arena",
     title: "Vision PPO Racing Arena: Diagnosing a Silent RL Training Failure",

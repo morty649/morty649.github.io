@@ -8,7 +8,20 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Card className="flex h-full flex-col overflow-hidden border border-white/50 bg-white/60 p-0 shadow-lg shadow-black/5 backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 dark:border-white/10 dark:bg-white/5 dark:shadow-black/20 dark:hover:shadow-black/30">
       <Link href={`/projects/${project.slug}/`} className="block cursor-pointer">
-        <div className="project-card-cover">
+        <div className={project.video ? "project-card-cover project-card-cover-video" : "project-card-cover"}>
+          {project.video && (
+            <video
+              className="project-card-video"
+              src={project.video.src}
+              poster={project.video.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={project.video.caption}
+            />
+          )}
           <span className="rounded-full border border-white/30 bg-white/20 px-2.5 py-1 text-[10px] font-medium text-foreground/70 backdrop-blur-sm dark:bg-black/10">
             {project.category}
           </span>

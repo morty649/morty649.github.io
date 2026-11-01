@@ -90,6 +90,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </header>
 
+      {project.video && (
+        <figure className="glass-card overflow-hidden p-3 md:p-4">
+          <video
+            className="aspect-[4/3] w-full rounded-lg bg-black object-contain"
+            src={project.video.src}
+            poster={project.video.poster}
+            controls
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
+          {project.video.caption && (
+            <figcaption className="mt-3 text-center text-xs text-muted-foreground">{project.video.caption}</figcaption>
+          )}
+        </figure>
+      )}
+
       <section className="glass-card p-6 md:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">The problem</p>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight">Why build this?</h2>

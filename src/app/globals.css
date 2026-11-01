@@ -384,6 +384,26 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
     linear-gradient(135deg, rgba(var(--gradient-3), 0.42), rgba(var(--gradient-4), 0.2));
 }
 
+/* the game footage has a black background, so letterboxing on black blends in */
+.project-card-cover-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.project-card-cover-video > span {
+  position: relative;
+  color: rgb(255 255 255 / 0.75);
+}
+
+.project-card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .resume-rule {
   border-top: 1px solid hsl(var(--border) / 0.7);
 }
