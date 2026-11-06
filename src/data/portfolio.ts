@@ -32,17 +32,23 @@ export const SITE = {
   name: "Maruthi Enugula",
   firstName: "Maruthi",
   handle: "morty649",
+  // The sticky note on the home page reads its text from this Gist.
+  nowGistId: "29e88adf1a7239a89bc33e47af23225c",
   initials: "ME",
   url: "https://morty649.github.io",
   email: "enugulamaruthi@gmail.com",
   location: "Hyderabad, India",
   avatarPath: "/avatar.jpg",
   avatarUrl: "https://morty649.github.io/avatar.jpg",
-  title: "ML Researcher · World Models & Continual Learning",
+  title: "Learning ML by building things",
   description:
-    "I study systems that keep learning after deployment: JEPA-style world models that adapt over time, and the RL rewards that train them.",
+    "I build things and rerun papers to see if they hold up. World models and continual learning are what I'm most curious about right now, and I'd love to work on them.",
+  // The resume states facts rather than the home page's casual intro.
+  resumeTitle: "AI Research Intern at Scaled Focus, 2026 · Activate AI Fellow",
+  resumeSummary:
+    "I rerun ML papers and test where they break, mostly JEPA-style world models and RL reward design.",
   intro:
-    "My current work is on continual learning and JEPA-style world models: how a model that predicts in latent space can adapt at test time, what reward it should get when reality grades its predictions, and how such systems fail. Before this I worked on RL post-training, reward hacking, and agents.",
+    "Right now I'm trying to understand continual learning and JEPA-style world models: how a model that predicts in latent space can adapt at test time, what reward it should get when reality grades its predictions, and how such systems fail. Before this I worked on RL post-training, reward hacking, and agents.",
   interests: [
     "JEPA-style world models",
     "Continual and test-time learning",

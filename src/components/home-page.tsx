@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Award, ChevronDown, Network } from "lucide-react";
+import { NowNote } from "@/components/now-note";
 import { PostCard } from "@/components/post-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { ListedPost } from "@/lib/blog";
@@ -52,7 +53,7 @@ export function HomePage({ latestPosts }: { latestPosts: readonly ListedPost[] }
 
   return (
     <main id="main-content" className="flex min-h-[100dvh] flex-col space-y-6 py-section-lg">
-      <section id="hero">
+      <section id="hero" className="relative">
         <GlassCard delay={BLUR_FADE_DELAY} className="hero-glass overflow-hidden">
           <div className="w-full py-8 md:py-12">
             <div className="flex flex-col items-center space-y-8 text-center">
@@ -92,7 +93,7 @@ export function HomePage({ latestPosts }: { latestPosts: readonly ListedPost[] }
                     href="#research"
                     className="font-medium text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:text-primary/80"
                   >
-                    Current research
+                    What I&apos;m exploring
                   </a>
                   <span aria-hidden="true">·</span>
                   <Link
@@ -113,6 +114,7 @@ export function HomePage({ latestPosts }: { latestPosts: readonly ListedPost[] }
             </div>
           </div>
         </GlassCard>
+        <NowNote />
       </section>
 
       <section id="graph">
@@ -192,9 +194,9 @@ export function HomePage({ latestPosts }: { latestPosts: readonly ListedPost[] }
         <GlassCard delay={BLUR_FADE_DELAY * 11}>
           <div className="space-y-6">
             <div className="space-y-3 text-center">
-              <h2 className="text-2xl font-bold">Research.</h2>
+              <h2 className="text-2xl font-bold">Experiments.</h2>
               <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-                What I am working on now: world models, JEPA, and the rewards that train systems after deployment.
+                Papers I&apos;m rerunning and small experiments I&apos;m trying, to understand world models, JEPA, and how rewards shape training.
               </p>
             </div>
             <div className="space-y-4">

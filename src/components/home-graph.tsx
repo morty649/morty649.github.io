@@ -23,7 +23,7 @@ interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
 // Verified relationships between the sections that exist on Maruthi's site.
 const CONTENT_LINKS: Array<{ source: string; target: string; reason: string }> = [
   { source: "hero", target: "about", reason: "introduction, personal story" },
-  { source: "hero", target: "research", reason: "current research focus" },
+  { source: "hero", target: "research", reason: "current focus" },
   { source: "research", target: "projects", reason: "earlier RL work leads here" },
   { source: "hero", target: "work", reason: "recent role, professional identity" },
   { source: "about", target: "contact", reason: "profile, ways to connect" },
@@ -64,7 +64,7 @@ function getCategory(id: string): string {
 const SECTIONS = [
   { id: "hero", title: "Introduction", label: "intro" },
   { id: "about", title: "About Me", label: "about" },
-  { id: "research", title: "Research", label: "research" },
+  { id: "research", title: "Experiments", label: "experiments" },
   { id: "work", title: "Work Experience", label: "work" },
   { id: "education", title: "Education", label: "education" },
   { id: "tech-stack", title: "Technical Skills", label: "tech stack" },

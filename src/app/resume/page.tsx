@@ -14,11 +14,11 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: `Web resume for ${SITE.name}, AI/ML engineer and researcher.`,
+  description: `Web resume for ${SITE.name}.`,
   alternates: { canonical: "/resume/" },
   openGraph: {
     title: `Resume | ${SITE.name}`,
-    description: `Web resume for ${SITE.name}, AI/ML engineer and researcher.`,
+    description: `Web resume for ${SITE.name}.`,
     url: `${SITE.url}/resume/`,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE.name} portfolio` }],
   },
@@ -39,8 +39,8 @@ export default function ResumePage() {
         <header className="flex flex-col justify-between gap-7 sm:flex-row sm:items-start">
           <div>
             <h1 className="text-4xl font-semibold tracking-[-0.045em]">{SITE.name}</h1>
-            <p className="mt-2 font-medium text-primary">{SITE.title}</p>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">{SITE.description}</p>
+            <p className="mt-2 font-medium text-primary">{SITE.resumeTitle}</p>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">{SITE.resumeSummary}</p>
           </div>
           <div className="grid gap-2 text-xs text-muted-foreground sm:text-right">
             <a className="inline-flex items-center gap-2 sm:justify-end" href={`mailto:${SITE.email}`}>

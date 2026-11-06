@@ -30,7 +30,7 @@ interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
 const SECTIONS = [
   { id: "hero", title: "Introduction", label: "intro", type: "section" as const },
   { id: "about", title: "About Me", label: "about", type: "section" as const },
-  { id: "research", title: "Research", label: "research", type: "section" as const },
+  { id: "research", title: "Experiments", label: "experiments", type: "section" as const },
   { id: "work", title: "Work Experience", label: "work", type: "section" as const },
   { id: "education", title: "Education", label: "education", type: "section" as const },
   { id: "tech-stack", title: "Technical Skills", label: "tech stack", type: "section" as const },
@@ -59,7 +59,7 @@ type LinkDefinition = {
 const SECTION_LINKS: LinkDefinition[] = [
   { source: "hero", target: "about", reason: "introduction → full story" },
   { source: "hero", target: "research", reason: "current focus" },
-  { source: "research", target: "projects", reason: "research → earlier work" },
+  { source: "research", target: "projects", reason: "experiments → earlier work" },
   { source: "hero", target: "work", reason: "recent role" },
   { source: "about", target: "contact", reason: "profile → contact" },
   { source: "work", target: "education", reason: "experience → foundation" },
@@ -116,7 +116,7 @@ const CATEGORIES: Record<string, { name: string; items: string[]; icon: any }> =
     icon: Folder,
   },
   "research": {
-    name: "Research & RL",
+    name: "Experiments & RL",
     items: ["project-vision-ppo-racing-arena", "project-browser-control-qwen-grpo", "project-rl-alignment-tinystories"],
     icon: Sparkles,
   },
