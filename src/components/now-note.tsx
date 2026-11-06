@@ -8,6 +8,8 @@ type Note = { text: string; updatedAt: string };
 const GIST_URL = `https://api.github.com/gists/${SITE.nowGistId}`;
 const CACHE_KEY = "now-note";
 const MAX_LENGTH = 280;
+// GitHub refuses a blank Gist, so a lone "-" or "." is how to say "no note right now".
+const NO_NOTE = /^[-.\s]*$/;
 
 function readCache(): Note | null {
   try {
@@ -48,7 +50,7 @@ function timeAgo(iso: string): string {
 /**
  * A sticky note whose text lives in a public GitHub Gist, so it can change without a deploy.
  * If the fetch fails it keeps the last copy this browser saw; with no copy it renders nothing.
- * Deleting the Gist removes the note, including those saved copies.
+ * A Gist holding only dashes or dots hides the note, and so does deleting it. Both clear saved copies.
  */
 export function NowNote() {
   const [note, setNote] = useState<Note | null>(null);
@@ -68,7 +70,7 @@ export function NowNote() {
       })
       .then((gist: { updated_at: string; files: Record<string, { content?: string }> } | null) => {
         const text = gist && Object.values(gist.files)[0]?.content?.trim().slice(0, MAX_LENGTH);
-        const fresh = gist && text ? { text, updatedAt: gist.updated_at } : null;
+        const fresh = gist && text && !NO_NOTE.test(text) ? { text, updatedAt: gist.updated_at } : null;
         setNote(fresh);
         writeCache(fresh);
       })
